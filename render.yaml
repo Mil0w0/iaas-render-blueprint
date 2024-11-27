@@ -1,0 +1,17 @@
+services:
+  - type: web 
+    plan: free
+    name: blueprint-webservice
+    runtime: node
+    repo: https://github.com/Mil0w0/iaas-render-blueprint
+    buildCommand: "npm i"
+    startCommand: "npm run start"
+    envVars:
+      - key: DATABASE_URL # Sets DATABASE_URL to the connection string of the django-app-db database
+        fromDatabase:
+          name: blueprint-db
+          property: connectionString
+
+databases:
+  - name: blueprint-db # A PostgreSQL database named django-app-db running on a free instance
+    plan: free
